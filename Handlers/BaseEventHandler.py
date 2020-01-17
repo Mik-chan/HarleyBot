@@ -3,6 +3,7 @@ class BaseEventHandler:
     HELP_MSG = ''
     DEF_RIGTHS = False
     CMD = ''
+    MIN_ARGS = 0
 
     def __init__(self, harley_bot):
         self.harley = harley_bot
@@ -12,6 +13,9 @@ class BaseEventHandler:
         pass
 
     def trigger(self, event):
+        if 'args' in event and len(event['args']) < 1 + self.MIN_ARGS:
+            return False
+
         if isinstance(self.CMD, str):
             return self._check_cmd(event, self.CMD)
 
@@ -24,7 +28,7 @@ class BaseEventHandler:
     def _get_data(self, path=[]):
         return self.harley.get_data_table(['handlers', self.ID] + path)
 
-    def _check_cmd(self, event, cmd):
+    def __check_cmd(self, event, cmd):
         return (
             event['message'].lower() == cmd.lower() or
             event['message'].lower().startswith(cmd.lower() + ' ')
