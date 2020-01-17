@@ -1,4 +1,5 @@
-import os, sys
+import os
+import sys
 
 path = os.path.dirname(os.path.abspath(__file__)) + '/Handlers'
 for py in [f[:-3] for f in os.listdir(path) if f.endswith('.py') and f != '__init__.py']:
@@ -19,6 +20,7 @@ def build_handler_list(harley_bot, handlers=[]):
         DestroyYaoiHandler,
         GreetingHandler,
         HateHandler,
+        CrusadeHandler,
     ]
 
     for handler in add_handlers:

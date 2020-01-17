@@ -24,3 +24,37 @@ class BaseEventHandler:
 
     def __str__(self):
         return self.ID
+
+
+class BasicActionHandler(BaseEventHandler):
+    # Сообщение
+    # Теги: id, name, sex_ending, args
+    MSG = ''
+
+    # Команда
+    CMD = ''
+
+    # Окончания
+    SEX_M = ''
+    SEX_F = ''
+
+    def handle(self, event):
+        id = event['from_id']
+        name = self.harley.user_info(id)['first_name']
+        sex = self.harley.user_info(id)['sex']
+        sex_ending = self.SEX_F if sex == 1 else self.SEX_M
+        args = event['args'][len(self.CMD.split()):]
+
+        self.harley.send_msg(
+            event['peer_id'],
+            message=self.MSG.format(
+                id=id, name=name,
+                sex=sex_ending, args=' '.join(args)
+            )
+        )
+
+    def trigger(self, event):
+        return (
+            event['message'].lower() == self.CMD.lower() or
+            event['message'].lower().startswith(self.CMD.lower() + ' ')
+        )
