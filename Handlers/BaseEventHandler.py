@@ -50,11 +50,7 @@ class BasicActionHandler(BaseEventHandler):
 
         message = self.MSG.format(
             id=id, name=name,
-            sex=sex_ending, args=' '.join(args),
-            attachment=(
-                None if self.IMG is False
-                else self.harley.arts_pool.random(self.ID)
-            )
+            sex=sex_ending, args=' '.join(args)
         )
 
         return message
@@ -62,7 +58,11 @@ class BasicActionHandler(BaseEventHandler):
     def handle(self, event):
         self.harley.send_msg(
             event['peer_id'],
-            message=self.message(event)
+            message=self.message(event),
+            attachment=(
+                None if self.IMG is False
+                else self.harley.arts_pool.random(self.ID)
+            )
         )
 
     def trigger(self, event):

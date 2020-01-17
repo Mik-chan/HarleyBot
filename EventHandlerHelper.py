@@ -24,6 +24,7 @@ def build_handler_list(harley_bot, handlers=[]):
         VacuumHandler,
         RideHandler,
         FaggotHandler,
+        BecomeHandler,
     ]
 
     for handler in add_handlers:
