@@ -10,7 +10,7 @@ class RightsHandler(BaseEventHandler):
 
         access = args[1].lower() == 'promote'
         handler = args[2]
-        user_id = args[3]
+        user_id = self.harley.user_id(args[3])
         peer_id = event['peer_id']
         if len(args) >= 5:
             peer_id = args[4]

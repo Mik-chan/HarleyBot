@@ -190,9 +190,12 @@ class HarleyBot:
             user = str(screen_name)
         else:
             user = 'id' + screen_name
-        return self.vk_api.utils.resolveScreenName(
+
+        resolved = self.vk_api.utils.resolveScreenName(
             screen_name=user
-        )['object_id']
+        )
+
+        return resolved['object_id']
 
     __uinfo = {}
     __USER_FIELDS = 'sex,first_name,last_name'

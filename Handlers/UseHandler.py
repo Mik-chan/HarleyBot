@@ -8,5 +8,5 @@ class UseHandler(BaseEventHandler):
     def handle(self, event):
         self.harley.send_msg(
             event['peer_id'],
-            message="Args: " + ", ".join(event['args'])
+            message=self.harley.user_id(event['args'][1])
         )
