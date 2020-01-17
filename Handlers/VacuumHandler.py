@@ -6,7 +6,7 @@ class VacuumHandler(BasicActionHandler):
     DEF_RIGTHS = True
 
     CMD = "пропылесосить"
-    MSG = "[id{id}|{name}] пропылесосил{sex} {args}"
+    MSG = "[id{id}|{name}] пропылесосил{sex} {str_args}"
 
     SEX_M = ''
     SEX_F = 'а'

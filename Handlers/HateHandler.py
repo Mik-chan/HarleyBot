@@ -6,4 +6,4 @@ class HateHandler(BasicActionHandler):
     DEF_RIGTHS = True
 
     CMD = "ненавидеть"
-    MSG = "[id{id}|{name}] ненавидит {args}"
+    MSG = "[id{id}|{name}] ненавидит {str_args}"

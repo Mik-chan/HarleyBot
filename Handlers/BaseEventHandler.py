@@ -28,7 +28,7 @@ class BaseEventHandler:
 
 class BasicActionHandler(BaseEventHandler):
     # Сообщение
-    # Теги: id, name, sex_ending, args
+    # Теги: id, name, sex_ending, args, str_args
     MSG = ''
 
     # Команда
@@ -50,7 +50,8 @@ class BasicActionHandler(BaseEventHandler):
 
         message = self.MSG.format(
             id=id, name=name,
-            sex=sex_ending, args=' '.join(args)
+            sex=sex_ending, str_args=' '.join(args),
+            args=args
         )
 
         return message

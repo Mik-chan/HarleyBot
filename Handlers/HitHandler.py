@@ -6,7 +6,7 @@ class HitHandler(BasicActionHandler):
     DEF_RIGTHS = True
 
     CMD = "ударить"
-    MSG = "[id{id}|{name}] ударил{sex} {args}"
+    MSG = "[id{id}|{name}] ударил{sex} {str_args}"
 
     SEX_M = ''
     SEX_F = 'а'

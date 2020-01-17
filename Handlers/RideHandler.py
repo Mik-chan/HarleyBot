@@ -6,4 +6,4 @@ class RideHandler(BasicActionHandler):
     DEF_RIGTHS = True
 
     CMD = "кататься"
-    MSG = "[id{id}|{name}] катается {args}"
+    MSG = "[id{id}|{name}] катается {str_args}"

@@ -6,7 +6,7 @@ class FaggotHandler(BasicActionHandler):
     DEF_RIGTHS = True
 
     CMD = "опидорасить"
-    MSG = "[id{id}|{name}] опидорасил{sex} {args}"
+    MSG = "[id{id}|{name}] опидорасил{sex} {str_args}"
 
     SEX_M = ''
     SEX_F = 'а'

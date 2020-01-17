@@ -6,7 +6,7 @@ class BecomeHandler(BasicActionHandler):
     DEF_RIGTHS = True
 
     CMD = "стать"
-    MSG = "[id{id}|{name}] стал{sex} {args}"
+    MSG = "[id{id}|{name}] стал{sex} {str_args}"
 
     SEX_M = ''
     SEX_F = 'а'
