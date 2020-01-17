@@ -66,10 +66,10 @@ class HarleyBot:
             elif cmd == 'data':
                 print(self.data)
 
-            elif args[0] == 'promote' and len(args) == 2:
+            elif len(args) == 2 and args[0] == 'promote':
                 self.get_data_list(['admins']).append(int(args[1]))
 
-            elif args[0] == 'save' and len(args) == 2:
+            elif len(args) == 2 and args[0] == 'save':
                 self.save(str(args[1]))
 
             with self.__lock:
@@ -152,7 +152,8 @@ class HarleyBot:
             'out': event.obj.message['out'],
             'peer_id': event.obj.message['peer_id'],
             'message': event.obj.message['text'],
-            'conversation_message_id': event.obj.message['conversation_message_id'],
+            'conversation_message_id':
+                event.obj.message['conversation_message_id'],
             'fwd_messages': event.obj.message['fwd_messages'],
             'important': event.obj.message['important'],
             'random_id': event.obj.message['random_id'],
@@ -170,7 +171,8 @@ class HarleyBot:
 
         return res
 
-    def send_msg(self, peer_id, message=None, attachment=None, disable_mentions=None):
+    def send_msg(self, peer_id, message=None,
+                 attachment=None, disable_mentions=None):
         self.vk_api.messages.send(
             peer_id=int(peer_id),
             message=message,
@@ -188,18 +190,27 @@ class HarleyBot:
             user = str(screen_name)
         else:
             user = 'id' + screen_name
-        return self.vk_api.utils.resolveScreenName(screen_name=user)['object_id']
+        return self.vk_api.utils.resolveScreenName(
+            screen_name=user
+        )['object_id']
 
     __uinfo = {}
     __USER_FIELDS = 'sex,first_name,last_name'
 
     def user_info(self, user_id):
         if not (user_id in self.__uinfo):
-            self.__uinfo[user_id] = self.vk_api.users.get(user_ids=user_id, fields=self.__USER_FIELDS)[0]
+            self.__uinfo[user_id] = self.vk_api.users.get(
+                user_ids=user_id,
+                fields=self.__USER_FIELDS
+            )[0]
         return self.__uinfo[user_id]
 
     def members(self, peer_id):
-        res = self.vk_api.messages.getConversationMembers(peer_id=peer_id, fields=self.__USER_FIELDS)
+        res = self.vk_api.messages.getConversationMembers(
+            peer_id=peer_id,
+            fields=self.__USER_FIELDS
+        )
+
         for user in res['profiles']:
             if not (user['id'] in self.__uinfo):
                 self.__uinfo[user['id']] = user
@@ -207,7 +218,10 @@ class HarleyBot:
         return [item for item in res['items'] if item['member_id'] > 0]
 
     def is_admin(self, peer_id, user_id):
-        admins = [item['member_id'] for item in self.members(peer_id) if 'is_admin' in item and item['is_admin']]
+        admins = [
+            item['member_id'] for item in self.members(peer_id)
+            if 'is_admin' in item and item['is_admin']
+        ]
 
         admins.extend(self.get_data_list(['peers', str(peer_id), 'admins']))
         admins.extend(self.get_data_list(['admins']))
