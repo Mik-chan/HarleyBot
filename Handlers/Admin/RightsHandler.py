@@ -3,6 +3,7 @@ from ..BaseEventHandler import BaseEventHandler
 
 class RightsHandler(BaseEventHandler):
     ID = '_admin_rights'
+    CMD = 'rights'
 
     def handle(self, event):
         args = event['args']
@@ -25,12 +26,6 @@ class RightsHandler(BaseEventHandler):
             event['peer_id'],
             message=msg.format(handler, user_id)
         )
-
-    def trigger(self, event):
-        if len(event['args']) < 4:
-            return False
-
-        return event['args'][0].lower() == 'rights'
 
     def set_rigths(self, access, handler, user_id, peer_id=None):
         if peer_id is None:

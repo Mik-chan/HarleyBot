@@ -2,6 +2,7 @@ class BaseEventHandler:
     ID = 'base_event'
     HELP_MSG = ''
     DEF_RIGTHS = False
+    CMD = ''
 
     def __init__(self, harley_bot):
         self.harley = harley_bot
@@ -11,10 +12,23 @@ class BaseEventHandler:
         pass
 
     def trigger(self, event):
+        if isinstance(self.CMD, str):
+            return self._check_cmd(event, self.CMD)
+
+        if isinstance(self.CMD, list):
+            for cmd in self.CMD:
+                if self._check_cmd(event, cmd):
+                    return True
         return False
 
     def _get_data(self, path=[]):
         return self.harley.get_data_table(['handlers', self.ID] + path)
+
+    def _check_cmd(self, event, cmd):
+        return (
+            event['message'].lower() == cmd.lower() or
+            event['message'].lower().startswith(cmd.lower() + ' ')
+        )
 
     @property
     def _data(self):
@@ -30,9 +44,6 @@ class BasicActionHandler(BaseEventHandler):
     # Сообщение
     # Теги: id, name, sex_ending, args, str_args
     MSG = ''
-
-    # Команда
-    CMD = ''
 
     # Окончания
     SEX_M = ''
@@ -64,10 +75,4 @@ class BasicActionHandler(BaseEventHandler):
                 None if self.IMG is False
                 else self.harley.arts_pool.random(self.ID)
             )
-        )
-
-    def trigger(self, event):
-        return (
-            event['message'].lower() == self.CMD.lower() or
-            event['message'].lower().startswith(self.CMD.lower() + ' ')
         )

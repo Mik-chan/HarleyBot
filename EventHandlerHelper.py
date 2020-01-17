@@ -32,6 +32,8 @@ def build_handler_list(harley_bot, handlers=[]):
         FlyHandler,
         RicardoHandler,
         BuildHouseHandler,
+        PresentHandler,
+        
     ]
 
     for handler in add_handlers:
