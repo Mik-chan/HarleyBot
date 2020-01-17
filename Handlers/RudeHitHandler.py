@@ -1,7 +1,7 @@
 from .BaseEventHandler import BasicActionHandler
 
 
-class HitHandler(BasicActionHandler):
+class RudeHitHandler(BasicActionHandler):
     ID = 'hit'
     DEF_RIGTHS = True
 

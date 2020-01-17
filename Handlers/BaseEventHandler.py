@@ -17,11 +17,11 @@ class BaseEventHandler:
             return False
 
         if isinstance(self.CMD, str):
-            return self._check_cmd(event, self.CMD)
+            return self.__check_cmd(event, self.CMD)
 
         if isinstance(self.CMD, list):
             for cmd in self.CMD:
-                if self._check_cmd(event, cmd):
+                if self.__check_cmd(event, cmd):
                     return True
         return False
 

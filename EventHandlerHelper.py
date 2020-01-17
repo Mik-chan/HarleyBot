@@ -34,7 +34,7 @@ def build_handler_list(harley_bot, handlers=[]):
         BuildHouseHandler,
         PresentHandler,
         RudeHitHandler,
-        
+        MoneyHandler,
     ]
 
     for handler in add_handlers:

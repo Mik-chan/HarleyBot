@@ -94,6 +94,7 @@ class HarleyBot:
                         _event['peer_id'],
                         _event['from_id']
                     )
+                    _event['is_admin'] = is_admin
 
                     handler = next(
                         (
@@ -201,6 +202,7 @@ class HarleyBot:
     __USER_FIELDS = 'sex,first_name,last_name'
 
     def user_info(self, user_id):
+        user_id = str(user_id)
         if not (user_id in self.__uinfo):
             self.__uinfo[user_id] = self.vk_api.users.get(
                 user_ids=user_id,
