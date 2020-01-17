@@ -4,9 +4,7 @@ from HarleyBot import HarleyBot
 def main():
     config = {
         "api_key":
-            "3d7683f13e30172b7f5ebe5448ce"
-            "f62d992975d1f7e6915bb0ef71d9"
-            "087baadfa3538c76ef8e5a6ba1bed",
+            "c7b9614a600d732d9487dc3d828342d3c14fa67a8daca36ee3b012447fd36be071be11991540e5474ea55",
         "group_id": "61782600",
         "creator": 99806575
     }

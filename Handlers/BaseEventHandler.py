@@ -38,19 +38,31 @@ class BasicActionHandler(BaseEventHandler):
     SEX_M = ''
     SEX_F = ''
 
-    def handle(self, event):
+    # Добавлять ли изображение
+    IMG = True
+
+    def message(self, event):
         id = event['from_id']
         name = self.harley.user_info(id)['first_name']
         sex = self.harley.user_info(id)['sex']
         sex_ending = self.SEX_F if sex == 1 else self.SEX_M
         args = event['args'][len(self.CMD.split()):]
 
+        message = self.MSG.format(
+            id=id, name=name,
+            sex=sex_ending, args=' '.join(args),
+            attachment=(
+                None if self.IMG is False
+                else self.harley.arts_pool.random(self.ID)
+            )
+        )
+
+        return message
+
+    def handle(self, event):
         self.harley.send_msg(
             event['peer_id'],
-            message=self.MSG.format(
-                id=id, name=name,
-                sex=sex_ending, args=' '.join(args)
-            )
+            message=self.message(event)
         )
 
     def trigger(self, event):
