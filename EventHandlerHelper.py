@@ -33,6 +33,7 @@ def build_handler_list(harley_bot, handlers=[]):
         RicardoHandler,
         BuildHouseHandler,
         PresentHandler,
+        RudeHitHandler,
         
     ]
 
