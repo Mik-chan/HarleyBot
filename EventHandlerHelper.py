@@ -38,7 +38,8 @@ def build_handler_list(harley_bot, handlers=[]):
         MoneyHandler,
         CoinHandler,
         PrintPeerIdHandler,
-        BanHandler
+        BanHandler,
+        TrippingHandler,
     ]
 
     for handler in add_handlers:
