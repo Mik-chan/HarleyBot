@@ -39,7 +39,7 @@ class MoneyHandler(BaseEventHandler):
             elif cmd in ["удалить", "-"]:
                 data[to_id] -= ammo
                 sent = True
-            
+
             if sent:
                 self.harley.send_msg(
                         event['peer_id'],
@@ -60,7 +60,7 @@ class MoneyHandler(BaseEventHandler):
                 data[to_id] += ammo
 
                 msg = "Теперь у пользователя [id{}|{}] {} тиньге!".format(
-                    to_id, self.harley.user_info(to_id), data[to_id]
+                    to_id, self.harley.user_info(to_id)['first_name'], data[to_id]
                 )
 
             self.harley.send_msg(
