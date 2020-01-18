@@ -56,14 +56,26 @@ class BasicActionHandler(BaseEventHandler):
     # Добавлять ли изображение
     IMG = True
 
-    def message(self, event):
-        id = event['from_id']
-        name = self.harley.user_info(id)['first_name']
-        sex = self.harley.user_info(id)['sex']
-        sex_ending = self.SEX_F if sex == 1 else self.SEX_M
-        args = event['args'][len(self.CMD.split()):]
+    def message(self, event, msg=None,
+                id=None, name=None, sex_ending=None,
+                sex=None, args=None):
+        if msg is None:
+            msg = self.MSG
+        if id is None:
+            id = event['from_id']
+        if name is None:
+            name = self.harley.user_info(id)['first_name']
+        if sex is None:
+            sex = self.harley.user_info(id)['sex']
+        if sex_ending is None:
+            sex_ending = self.SEX_F if sex == 1 else self.SEX_M
+        if args is None:
+            if isinstance(self.CMD, str):
+                args = event['args'][len(self.CMD.split()):]
+            else:
+                args = event['args']
 
-        message = self.MSG.format(
+        message = msg.format(
             id=id, name=name,
             sex=sex_ending, str_args=' '.join(args),
             args=args
