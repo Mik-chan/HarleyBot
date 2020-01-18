@@ -6,7 +6,7 @@ class GreetingHandler(BaseEventHandler):
     DEF_RIGTHS = True
 
     def handle(self, event):
-        id = event['from_id']
+        id = event['action']['member_id']
         name = self.harley.user_info(id)['first_name']
         msg = (
             "Приветствую тебя впервые в нашей беседе! "
