@@ -96,8 +96,7 @@ class HarleyBot:
                     )
                     _event['is_admin'] = is_admin
 
-                    handler = next(
-                        (
+                    handlers = [
                             h for h in self.handlers
                             if (
                                 is_admin or
@@ -108,11 +107,9 @@ class HarleyBot:
                                 )
                             ) and
                             h.trigger(_event)
-                        ),
-                        None
-                    )
+                    ]
 
-                    if handler is not None:
+                    for handler in handlers:
                         handler.handle(_event)
 
             except Exception as e:
@@ -244,3 +241,11 @@ class HarleyBot:
                 self.data = json.load(fin)
         except IOError:
             pass
+
+    def kick(self, chat_id, user_id):
+        try:
+            self.vk_api.messages.removeChatUser(
+                chat_id=chat_id, member_id=user_id
+            )
+        except Exception as e:
+            print(e)
