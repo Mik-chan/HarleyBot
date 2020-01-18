@@ -31,19 +31,24 @@ class MoneyHandler(BaseEventHandler):
             data[to_id] = 0
 
         if event['is_admin']:
+            sent = False
+
             if cmd in ['добавить', '+']:
                 data[to_id] += ammo
+                sent = True
             elif cmd in ["удалить", "-"]:
                 data[to_id] -= ammo
-
-            self.harley.send_msg(
-                    event['peer_id'],
-                    message="Теперь у пользователя {} {} тиньге".format(
-                        to_id,
-                        data[to_id]
+                sent = True
+            
+            if sent:
+                self.harley.send_msg(
+                        event['peer_id'],
+                        message="Теперь у пользователя {} {} тиньге".format(
+                            to_id,
+                            data[to_id]
+                        )
                     )
-                )
-            return
+                return
 
         if cmd in ["перевести", "передать", "перевод"]:
             if ammo < 0:
